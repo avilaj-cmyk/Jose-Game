@@ -1,8 +1,61 @@
 [gd_scene format=3 uid="uid://bujrxvtpv6407"]
 
 [ext_resource type="PackedScene" uid="uid://e75i17y8s855" path="res://ball.tscn" id="1_3hls8"]
+[ext_resource type="Script" uid="uid://bpmekfr637ij8" path="res://level_1.gd" id="1_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://bfj30lioqqeci" path="res://player.tscn" id="2_hbghi"]
+[ext_resource type="PackedScene" uid="uid://dxqjup86nwf35" path="res://computer.tscn" id="3_hn12h"]
+[ext_resource type="Texture2D" uid="uid://bjlwlrr8k6lw8" path="res://Board.png" id="5_rka8t"]
 
-[node name="Game" type="Node2D" unique_id=153512615]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn12h"]
+size = Vector2(76, 862)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihfcg"]
+size = Vector2(68, 862)
+
+[node name="level1" type="Node2D" unique_id=153512615]
+script = ExtResource("1_ihfcg")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1704969614]
+position = Vector2(554, 340.00003)
+scale = Vector2(2.4837906, 2.3395605)
+texture = ExtResource("5_rka8t")
 
 [node name="ball" parent="." unique_id=920821987 instance=ExtResource("1_3hls8")]
-position = Vector2(34944, 20416)
+position = Vector2(567, 311)
+
+[node name="player" parent="." unique_id=1089444535 instance=ExtResource("2_hbghi")]
+position = Vector2(824, 344)
+
+[node name="Computer" parent="." unique_id=1181778654 node_paths=PackedStringArray("ball") instance=ExtResource("3_hn12h")]
+position = Vector2(203, 140)
+ball = NodePath("../ball")
+
+[node name="ComputerGoal" type="Area2D" parent="." unique_id=1597625540]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComputerGoal" unique_id=1273369011]
+position = Vector2(1142, 318)
+shape = SubResource("RectangleShape2D_hn12h")
+
+[node name="PlayerGoal" type="Area2D" parent="." unique_id=3157627]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGoal" unique_id=131495644]
+position = Vector2(-6, 310)
+shape = SubResource("RectangleShape2D_ihfcg")
+
+[node name="ComputerScore" type="Label" parent="." unique_id=2004282924]
+offset_left = 76.0
+offset_top = 7.0
+offset_right = 330.0
+offset_bottom = 50.0
+text = "This is computer score
+"
+
+[node name="PlayerScore" type="Label" parent="." unique_id=191394461]
+offset_left = 657.0
+offset_top = 12.0
+offset_right = 936.0
+offset_bottom = 67.0
+text = "player score"
+
+[connection signal="computer_goal" from="ball" to="." method="_on_ball_computer_goal"]
+[connection signal="player_goal" from="ball" to="." method="_on_ball_player_goal"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dxqjup86nwf35"]
+
+[ext_resource type="Script" uid="uid://b0soyc4idrm0i" path="res://computer.gd" id="1_18hgq"]
+[ext_resource type="Texture2D" uid="uid://vw88h4hnnvqp" path="res://Computer.png" id="2_gcbbq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18hgq"]
+size = Vector2(20, 116)
+
+[node name="Computer" type="Area2D" unique_id=1181778654]
+script = ExtResource("1_18hgq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1008618224]
+scale = Vector2(1, 0.95)
+texture = ExtResource("2_gcbbq")
+metadata/computer = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2087667404]
+shape = SubResource("RectangleShape2D_18hgq")
